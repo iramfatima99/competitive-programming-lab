@@ -1,0 +1,42 @@
+
+#include <iostream>
+#include <stack>
+using namespace std;
+
+int main() {
+    string str;
+    stack<char> s;
+
+    cout << "Enter brackets: ";
+    cin >> str;
+
+    for (char ch : str) {
+
+        if (ch == '(' || ch == '{' || ch == '[') {
+            s.push(ch);
+        }
+        else {
+            if (s.empty()) {
+                cout << "Invalid";
+                return 0;
+            }
+
+            char top = s.top();
+            s.pop();
+
+            if ((ch == ')' && top != '(') ||
+                (ch == '}' && top != '{') ||
+                (ch == ']' && top != '[')) {
+                cout << "Invalid";
+                return 0;
+            }
+        }
+    }
+
+    if (s.empty())
+        cout << "Valid Parentheses";
+    else
+        cout << "Invalid Parentheses";
+
+    return 0;
+}
