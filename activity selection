@@ -1,0 +1,47 @@
+
+#include <iostream>
+#include <algorithm>
+using namespace std;
+
+int main() {
+    int n;
+
+    cout << "Enter number of activities: ";
+    cin >> n;
+
+    int start[n], finish[n];
+
+    cout << "Enter start and finish times: ";
+
+    for (int i = 0; i < n; i++) {
+        cin >> start[i] >> finish[i];
+    }
+
+    pair<int, int> a[n];
+
+    for (int i = 0; i < n; i++) {
+        a[i] = {finish[i], start[i]};
+    }
+
+    sort(a, a + n);
+
+    int count = 0;
+    int lastFinish = -1;
+
+    cout << "Selected activities: ";
+
+    for (int i = 0; i < n; i++) {
+
+        if (a[i].second >= lastFinish) {
+            cout << "(" << a[i].second
+                 << "," << a[i].first << ") ";
+
+            lastFinish = a[i].first;
+            count++;
+        }
+    }
+
+    cout << "\nMaximum activities: " << count;
+
+    return 0;
+}
